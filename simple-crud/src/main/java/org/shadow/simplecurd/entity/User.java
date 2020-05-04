@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private long id;
+	@Column(name = "userid")
+	private long userid;
 	
 	@Column(name = "username")
 	private String username;
@@ -21,12 +21,14 @@ public class User {
 	@Column(name="password")
 	private String password;
 
-	public long getId() {
-		return id;
+	
+
+	public long getUserid() {
+		return userid;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
 
 	public String getUsername() {
