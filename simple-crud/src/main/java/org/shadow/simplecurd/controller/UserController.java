@@ -1,10 +1,14 @@
 package org.shadow.simplecurd.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.shadow.simplecurd.entity.User;
 import org.shadow.simplecurd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +25,17 @@ public class UserController {
 	@GetMapping("/user")
 	public List<User> findAll(){
 		return userService.findAll();
+	}
+	
+	@GetMapping("/user/findAllMap")
+	public List<Map<String, Object>> findAllMap(){
+		return userService.findAllMap();
+	}
+	
+	@GetMapping("/user/findAllByPage")
+	public List<User> findAllByPage(
+			@PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable pageable) {
+		return userService.findAllByPage(pageable);
 	}
 	
 	@PostMapping("/user")

@@ -1,10 +1,17 @@
 package org.shadow.simplecurd.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name = "user")
@@ -12,7 +19,7 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "userid")
+	@Column(name = "user_id")
 	private long userid;
 	
 	@Column(name = "username")
@@ -20,8 +27,14 @@ public class User {
 	
 	@Column(name="password")
 	private String password;
-
 	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Address.class)
+	@JoinColumn(name = "address_id", referencedColumnName = "address_id")
+	private Address address;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = UserHobby.class)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	private Set<UserHobby> hobbies;
 
 	public long getUserid() {
 		return userid;
@@ -46,6 +59,25 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Set<UserHobby> getHobbies() {
+		return hobbies;
+	}
+
+	public void setHobbies(Set<UserHobby> hobbies) {
+		this.hobbies = hobbies;
+	}
+	
+	
 	
 	
 
