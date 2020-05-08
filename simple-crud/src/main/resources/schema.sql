@@ -3,7 +3,8 @@ CREATE TABLE `user` (
   `user_id` bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(255),
   `password` varchar(255),
-  `address_id` bigint
+  `address_id` bigint,
+  `create_date` timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS `address`;

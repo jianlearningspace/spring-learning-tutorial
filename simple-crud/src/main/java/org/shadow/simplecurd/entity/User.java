@@ -1,5 +1,6 @@
 package org.shadow.simplecurd.entity;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,6 +28,9 @@ public class User {
 	
 	@Column(name="password")
 	private String password;
+	
+	@Column(name = "create_date")
+	private Timestamp createDate;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Address.class)
 	@JoinColumn(name = "address_id", referencedColumnName = "address_id")
@@ -75,6 +79,14 @@ public class User {
 
 	public void setHobbies(Set<UserHobby> hobbies) {
 		this.hobbies = hobbies;
+	}
+
+	public Timestamp getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
 	}
 	
 	
