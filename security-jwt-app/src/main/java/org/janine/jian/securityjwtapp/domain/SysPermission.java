@@ -57,7 +57,7 @@ public class SysPermission{
 	@JoinColumn(name = "resource_id", referencedColumnName = "resource_id")
 	private SysResource resource;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SysRole.class)
+	@ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER, targetEntity = SysRole.class)
 	@JoinColumn(name = "role_id", referencedColumnName = "role_id")
 	private SysRole role;
 	

@@ -41,7 +41,7 @@ public class SysUserRole{
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private SysUser user;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SysRole.class)
+	@ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER, targetEntity = SysRole.class)
 	@JoinColumn(name = "role_id", referencedColumnName = "role_id")
 	private SysRole role;
 	

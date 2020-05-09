@@ -1,6 +1,8 @@
 package org.janine.jian.securityjwtapp.security;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.janine.jian.securityjwtapp.domain.SysPermission;
@@ -30,7 +32,11 @@ public class AppUserDetailsService implements UserDetailsService{
 		if(null == sysUser)throw new UsernameNotFoundException("user【"+username+"】 is not find");
 		
 		List<Integer> roleIds = sysUser.getRoles().stream().map(SysUserRole::getRoleId).collect(Collectors.toList());
-		List<SysPermission> sysPermissions = (List<SysPermission>) sysPermissionRepository.findAllById(roleIds);
+		Set<SysPermission> sysPermissions = new HashSet<>();
+		for (int i = 0; i < roleIds.size(); i++) {
+			sysPermissions.addAll(sysPermissionRepository.findAllByRoleId(roleIds.get(i)));
+		}
+		
 		
 		return new org.springframework.security.core.userdetails.User(sysUser.getUsername(),"{bcrypt}"+sysUser.getPassword(),sysPermissions.stream()
                 .map(sysPermission -> new CustomGrantedAuthority(sysPermission.getResource()))
