@@ -1,15 +1,15 @@
 package org.janine.jian.securityjwtapp.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
 * 描述：sys_user_role模型
@@ -37,12 +37,14 @@ public class SysUserRole{
 	@Column(name = "role_id", insertable=false, updatable=false)
     private int roleId;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SysUser.class)
+	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	@JsonIgnore
 	private SysUser user;
 	
-	@ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER, targetEntity = SysRole.class)
+	@ManyToOne
 	@JoinColumn(name = "role_id", referencedColumnName = "role_id")
+	@JsonIgnore
 	private SysRole role;
 	
 	public int getUserRoleId() {

@@ -1,5 +1,6 @@
 package org.janine.jian.securityjwtapp.security;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -75,6 +76,11 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
                 .compact();
 
         response.addHeader("token", "Bearer " + token);
+        try {
+			response.getWriter().write("Bearer " + token);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 	
 	

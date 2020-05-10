@@ -4,6 +4,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -18,6 +19,9 @@ public class AppWebSecurity extends WebSecurityConfigurerAdapter{
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
+			.and()
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.addFilter(new LoginAuthenticationFilter(authenticationManager()))
 			.addFilter(new ActionAuthenticationFilter(authenticationManager()));

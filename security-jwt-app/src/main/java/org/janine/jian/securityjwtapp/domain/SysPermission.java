@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
 * 描述：sys_permission模型
 * @author tools
@@ -19,7 +22,6 @@ import javax.persistence.Table;
 @Table(name = "sys_permission")
 @Entity
 public class SysPermission{
-	
     /*
      * 权限ID
      */
@@ -53,12 +55,13 @@ public class SysPermission{
 	@Column(name = "order_by")
     private int orderBy;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SysResource.class)
+	@ManyToOne
 	@JoinColumn(name = "resource_id", referencedColumnName = "resource_id")
 	private SysResource resource;
 	
-	@ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER, targetEntity = SysRole.class)
+	@ManyToOne
 	@JoinColumn(name = "role_id", referencedColumnName = "role_id")
+	@JsonIgnore
 	private SysRole role;
 	
 	public int getPermissionId() {

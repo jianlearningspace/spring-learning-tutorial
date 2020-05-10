@@ -22,7 +22,6 @@ import javax.persistence.Table;
 @Table(name = "sys_user")
 @Entity
 public class SysUser{
-	
     /*
      * 用户ID
      */
@@ -66,7 +65,7 @@ public class SysUser{
 	@Column(name = "order_by")
     private int orderBy;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SysUserRole.class)
+	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, targetEntity = SysUserRole.class)
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private Set<SysUserRole> roles;
 	

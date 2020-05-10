@@ -50,7 +50,7 @@ public class SysRole{
 	@Column(name = "order_by")
     private int orderBy;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SysPermission.class)
+	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, targetEntity = SysPermission.class)
 	@JoinColumn(name = "role_id", referencedColumnName = "role_id")
 	private Set<SysPermission> permissions;
 	

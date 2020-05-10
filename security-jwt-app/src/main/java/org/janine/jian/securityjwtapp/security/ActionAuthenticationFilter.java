@@ -49,9 +49,7 @@ public class ActionAuthenticationFilter extends BasicAuthenticationFilter{
 	private UsernamePasswordAuthenticationToken getAuthentication(String token) {
     	byte[] bytesEncoded = Base64.getEncoder().encode(AppWebSecurity.signkey.getBytes());
 
-        Claims claims = Jwts.parser().setSigningKey(bytesEncoded)
-                .parseClaimsJws(token.replace("Bearer ", ""))
-                .getBody();
+        Claims claims = Jwts.parser().setSigningKey(bytesEncoded).parseClaimsJws(token.replace("Bearer ", "")).getBody();
         
         Collection<? extends GrantedAuthority> authorities = Arrays.stream(claims.get("AUTH").toString().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
